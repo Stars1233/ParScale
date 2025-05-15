@@ -1,7 +1,7 @@
 <div align="center">
 
 
-# Parallel Scaling Law
+# Parallel Scaling Law for Language Model
 
 
 _The Third Scaling Law beyond Parameters and Inference Time Scaling_
@@ -16,19 +16,21 @@ _The Third Scaling Law beyond Parameters and Inference Time Scaling_
     | 🔥&nbsp;<a href="#-scaling-data">Scaling Data</a>
     | 📚&nbsp;<a href="#-citation">Citation</a>
 </p>
-
 </div>
 
 ## 🌟 About
 
 - Most believe that scaling language models requires a heavy cost in either **parameters** (parameter scaling) or **inference time** (inference-time scaling). 
-- We introduce the *third* scaling paradigm for scaling LLMs: leverages **parallel computation** during both training and inference time (Parallel Scaling, or *ParScale*)
-
+- We introduce the *third* scaling paradigm for scaling LLMs: leverages **parallel computation** during both training and inference time (Parallel Scaling, or *ParScale*).
 - We apply $P$ diverse and learnable transformations to the input, execute forward passes of the model in parallel, and dynamically aggregate the $P$ outputs. 
+
+<img src="figures/teaser.png" style="width: 80%;" />
 
 ---
 
 ## 💡 Key Findings
+
+<img src="figures/scaling_comparison.png" style="width: 80%;" />
 
 Here are the core insights and benefits distilled from our theoretical analysis and empirical evaluations:
 
@@ -52,19 +54,21 @@ We release the inference code in `modeling_qwen2_parscale.py` and `configuration
 ## 📈 Scaling Law
 
 - Our preliminary theoretical analysis suggests that the loss of ParScale may follow a power law similar to the Chinchilla scaling law. 
-
 - We then carry out large-scale pre-training experiments on the Stack-V2 and Pile corpus, by ranging $P$ from 1 to 8 and model parameters from 500M to 4.4B. 
-
 - We use the results to fit a new *parallel scaling law* that generalizes the Chinchilla scaling law.
-
 - We release our parametric fitting code in `parametric_fit.py`.
+
+<img src="figures/scaling_law.png" style="width: 70%;" />
+
+<img src="figures/scaling_law2.png" style="width: 70%;" />
 
 ---
 
 ## ⚡ Cost Analysis
 
-- We further compare the inference efficiency between parallel scaling and parameter scaling at equivalent performance levels. 
+<img src="figures/cost.png" style="width: 70%;" />
 
+- We further compare the inference efficiency between parallel scaling and parameter scaling at equivalent performance levels. 
 - We release our analysis code in `cost_analysis.py`. Before using it, you should first install [llm-analysis](https://github.com/cli99/llm-analysis):
 
 ```bash
