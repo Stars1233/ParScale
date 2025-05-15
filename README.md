@@ -20,7 +20,7 @@ _Another Scaling Law beyond Parameters and Inference Time Scaling_
 
 ## 🌟 About
 
-- Most believe that scaling language models requires a heavy cost in either **parameters** (parameter scaling) or **inference time** (inference-time scaling). 
+- Most believe that scaling language models requires a heavy cost in either **space** (parameter scaling) or **time** (inference-time scaling). 
 - We introduce the *third* scaling paradigm for scaling LLMs: leverages **parallel computation** during both training and inference time (Parallel Scaling, or *ParScale*).
 - We apply $P$ diverse and learnable transformations to the input, execute forward passes of the model in parallel, and dynamically aggregate the $P$ outputs. 
 <div align="center">
