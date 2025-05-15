@@ -26,6 +26,7 @@ _Another Scaling Law beyond Parameters and Inference Time Scaling_
 <div align="center">
 <img src="figures/teaser.png" style="width: 80%;" />
 </div>
+
 ---
 
 ## 💡 Key Findings
