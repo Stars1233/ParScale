@@ -13,9 +13,10 @@ _Yet Another Scaling Law beyond Parameters and Inference Time Scaling_
     💡&nbsp;<a href="#-key-findings">Key Findings</a>
     | 📈&nbsp;<a href="#-scaling-law">Scaling Law</a>
     | ⚡&nbsp;<a href="#-cost-analysis">Cost Analysis</a>
-    | 🔥&nbsp;<a href="#-scaling-data">Scaling Data</a>
+    | 🔥&nbsp;<a href="#-models">Models</a>
     | 📚&nbsp;<a href="#-citation">Citation</a>
 </p>
+
 </div>
 
 ## 🌟 About
@@ -55,13 +56,12 @@ We release the inference code in `modeling_qwen2_parscale.py` and `configuration
 
 ## 📈 Scaling Law
 
-- Our preliminary theoretical analysis suggests that the loss of ParScale may follow a power law similar to the Chinchilla scaling law. 
-- We then carry out large-scale pre-training experiments on the Stack-V2 and Pile corpus, by ranging $P$ from 1 to 8 and model parameters from 500M to 4.4B. 
+- We carry out large-scale pre-training experiments on the Stack-V2 and Pile corpus, by ranging $P$ from 1 to 8 and model parameters from 500M to 4.4B. 
 - We use the results to fit a new *parallel scaling law* that generalizes the Chinchilla scaling law.
 - We release our parametric fitting code in `parametric_fit.py`.
+- Feel free to try [🤗 HuggingFace Space](https://huggingface.co/spaces/ParScale/Parallel_Scaling_Law) for a nice visualization for the parallel scaling law!
 <div align="center">
 <img src="figures/scaling_law.png" style="width: 70%;" />
-
 <img src="figures/scaling_law2.png" style="width: 70%;" />
 </div>
 
@@ -89,15 +89,19 @@ python cost_analysis.py --hidden_size 2560 --intermediate_size 13824 --P 2 --bat
 
 ---
 
-## Checkpoints
+## 🔥 Models
+
+***(The checkpoints are uploading ... Stay tuned)***
 
 ✨ are our recommendation for strong models!
 
-(The checkpoints are uploading ... Stay tuned)
-
 ### Base models for scaling training data to 1T tokens
 
-These models demonstrate strong competitiveness among existing small models, including SmolLM, gemma, and Llama-3.2 (see Table 4 for details).
+<div align="center">
+<img src="figures/1t.png" style="width: 70%;" />
+</div>
+
+These models demonstrate strong competitiveness among existing small models, including SmolLM, gemma, and Llama-3.2.
 
 |Model|Description|Download|
 |:-:|:-:|:-:|
@@ -120,7 +124,7 @@ We post-trained the aforementioned base model on SmolTalk-1M to enable conversat
 
 ### Continual Pretraining Qwen-2.5-3B
 
-We froze the parameters of Qwen-2.5-3B and only fine-tuned the newly introduced parameters on Stack-V2-Python. Since the following models share the same backbone parameters as Qwen-2.5-3B, they have the potential for dynamic parscale: switching P to adapt model capabilities during inference.
+We froze the parameters of Qwen-2.5-3B and only fine-tuned the newly introduced parameters on Stack-V2-Python. Since the following models share the same backbone parameters as Qwen-2.5-3B, they have the potential for dynamic ParScale: switching P to adapt model capabilities during inference.
 
 |Model|Description|Download|
 |:-:|:-:|:-:|
@@ -128,7 +132,7 @@ We froze the parameters of Qwen-2.5-3B and only fine-tuned the newly introduced 
 |ParScale-Qwen-3B-P4-Python|✨ ParScale $P=4$|[🤗 ParScale/ParScale-Qwen-3B-P4-Python](https://huggingface.co/ParScale/ParScale-Qwen-3B-P4-Python)|
 |ParScale-Qwen-3B-P8-Python|✨ ParScale $P=8$|[🤗 ParScale/ParScale-Qwen-3B-P8-Python](https://huggingface.co/ParScale/ParScale-Qwen-3B-P8-Python)|
 
-- For full pretraining on Stack-V2-Python
+- For full continual pretraining on Stack-V2-Python
 
 |Model|Description|Download|
 |:-:|:-:|:-:|
@@ -137,7 +141,7 @@ We froze the parameters of Qwen-2.5-3B and only fine-tuned the newly introduced 
 |ParScale-QwenInit-3B-P4-Python|ParScale $P=4$|[🤗 ParScale/ParScale-QwenInit-3B-P4-Python](https://huggingface.co/ParScale/ParScale-QwenInit-3B-P4-Python)|
 |ParScale-QwenInit-3B-P8-Python|ParScale $P=8$|[🤗 ParScale/ParScale-QwenInit-3B-P8-Python](https://huggingface.co/ParScale/ParScale-QwenInit-3B-P8-Python)|
 
-- For full pretraining on Pile
+- For full continual pretraining on Pile
 
 |Model|Description|Download|
 |:-:|:-:|:-:|
@@ -154,6 +158,7 @@ Download link: https://huggingface.co/ParScale/ParScale-{size}-{P}-{dataset}
 - {size}: model size, from {0.7B, 0.9B, 1.3B, 1.8B, 3B, 4.7B}
 - {P}: number of parallels, from {P1, P2, P4, P8}
 - {dataset}: training dataset, from {Python, Pile}
+- $6\times 4 \times 2=48$ checkpoints in total.
 
 
 ## 📚 Citation
