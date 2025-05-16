@@ -4,9 +4,9 @@
 # Parallel Scaling Law for Language Model
 
 
-_Another Scaling Law beyond Parameters and Inference Time Scaling_
+_Yet Another Scaling Law beyond Parameters and Inference Time Scaling_
 
-[![Paper](https://img.shields.io/badge/arXiv-2505.xxxxx-red)](https://arxiv.org/abs/2505.xxxxx)
+[![Paper](https://img.shields.io/badge/arXiv-2505.10475-red)](https://arxiv.org/abs/2505.10475)
 [![huggingface](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-FFD21E)](https://huggingface.co/ParScale)
 
 <p align="center">
@@ -43,7 +43,7 @@ Here are the core insights and benefits distilled from our theoretical analysis 
 
 🧠 **Stronger Performance on Reasoning Tasks**: Reasoning-intensive tasks (e.g., coding or math) benefit more from ParScale, which suggests that scaling computation can effectively push the boundary of reasoning. 
 
-⚡ **Superior Inference Efficiency**: ParScale can use up to **22x less memory increase and 6x less latency increase** compared to parameter scaling that achieves the same performance improvement (batch size=1).
+⚡ **Superior Inference Efficiency**: ParScale can use up to **22x less memory increase** and **6x less latency increase** compared to parameter scaling that achieves the same performance improvement (batch size=1).
 
 🧱 **Cost-Efficient Training via Two-Stage Strategy**: Training a parallel-scaled model doesn't require starting from scratch. With a two-stage training strategy, we can post-train ithe parallel components using only a small amount of data.
 
@@ -98,4 +98,15 @@ This section and model checkpoints are currently under development. Stay tuned f
 
 ## 📚 Citation
 
-!under construction!
+```bibtex
+@article{ParScale,
+      title={Parallel Scaling Law for Language Models}, 
+      author={Mouxiang Chen and Binyuan Hui and Zeyu Cui and Jiaxi Yang and Dayiheng Liu and Jianling Sun and Junyang Lin and Zhongxin Liu},
+      year={2025},
+      eprint={2505.10475},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      journal={arXiv preprint arXiv:2505.10475},
+      url={https://arxiv.org/abs/2505.10475}, 
+}
+```
