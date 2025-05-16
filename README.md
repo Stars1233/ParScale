@@ -64,6 +64,7 @@ We release the inference code in `modeling_qwen2_parscale.py` and `configuration
 
 <img src="figures/scaling_law2.png" style="width: 70%;" />
 </div>
+
 ---
 
 ## ⚡ Cost Analysis
@@ -88,12 +89,71 @@ python cost_analysis.py --hidden_size 2560 --intermediate_size 13824 --P 2 --bat
 
 ---
 
-## 🔥 Scaling Data
+## Checkpoints
 
-!under construction!
+✨ are our recommendation for strong models!
 
-This section and model checkpoints are currently under development. Stay tuned for updates!
+(The checkpoints are uploading ... Stay tuned)
 
+### Base models for scaling training data to 1T tokens
+
+These models demonstrate strong competitiveness among existing small models, including SmolLM, gemma, and Llama-3.2 (see Table 4 for details).
+
+|Model|Description|Download|
+|:-:|:-:|:-:|
+|ParScale-1.8B-P1|✨ Baseline $P=1$|[🤗 ParScale/ParScale-1.8B-P1](https://huggingface.co/ParScale/ParScale-1.8B-P1)|
+|ParScale-1.8B-P2|✨ ParScale $P=2$|[🤗 ParScale/ParScale-1.8B-P2](https://huggingface.co/ParScale/ParScale-1.8B-P2)|
+|ParScale-1.8B-P4|✨ ParScale $P=4$|[🤗 ParScale/ParScale-1.8B-P4](https://huggingface.co/ParScale/ParScale-1.8B-P4)|
+|ParScale-1.8B-P8|✨ ParScale $P=8$|[🤗 ParScale/ParScale-1.8B-P8](https://huggingface.co/ParScale/ParScale-1.8B-P8)|
+
+### Instruct models for scaling training data to 1T tokens
+
+We post-trained the aforementioned base model on SmolTalk-1M to enable conversational capabilities.
+
+|Model|Description|Download|
+|:-:|:-:|:-:|
+|ParScale-1.8B-P1-Inst|✨ Baseline $P=1$|[🤗 ParScale/ParScale-1.8B-P1-Inst](https://huggingface.co/ParScale/ParScale-1.8B-P1-Inst)|
+|ParScale-1.8B-P2-Inst|✨ ParScale $P=2$|[🤗 ParScale/ParScale-1.8B-P2-Inst](https://huggingface.co/ParScale/ParScale-1.8B-P2-Inst)|
+|ParScale-1.8B-P4-Inst|✨ ParScale $P=4$|[🤗 ParScale/ParScale-1.8B-P4-Inst](https://huggingface.co/ParScale/ParScale-1.8B-P4-Inst)|
+|ParScale-1.8B-P8-Inst|✨ ParScale $P=8$|[🤗 ParScale/ParScale-1.8B-P8-Inst](https://huggingface.co/ParScale/ParScale-1.8B-P8-Inst)|
+
+
+### Continual Pretraining Qwen-2.5-3B
+
+We froze the parameters of Qwen-2.5-3B and only fine-tuned the newly introduced parameters on Stack-V2-Python. Since the following models share the same backbone parameters as Qwen-2.5-3B, they have the potential for dynamic parscale: switching P to adapt model capabilities during inference.
+
+|Model|Description|Download|
+|:-:|:-:|:-:|
+|ParScale-Qwen-3B-P2-Python|✨ ParScale $P=2$|[🤗 ParScale/ParScale-Qwen-3B-P2-Python](https://huggingface.co/ParScale/ParScale-Qwen-3B-P2-Python)|
+|ParScale-Qwen-3B-P4-Python|✨ ParScale $P=4$|[🤗 ParScale/ParScale-Qwen-3B-P4-Python](https://huggingface.co/ParScale/ParScale-Qwen-3B-P4-Python)|
+|ParScale-Qwen-3B-P8-Python|✨ ParScale $P=8$|[🤗 ParScale/ParScale-Qwen-3B-P8-Python](https://huggingface.co/ParScale/ParScale-Qwen-3B-P8-Python)|
+
+- For full pretraining on Stack-V2-Python
+
+|Model|Description|Download|
+|:-:|:-:|:-:|
+|ParScale-QwenInit-3B-P1-Python|Baseline $P=1$|[🤗 ParScale/ParScale-QwenInit-3B-P1-Python](https://huggingface.co/ParScale/ParScale-QwenInit-3B-P1-Python)|
+|ParScale-QwenInit-3B-P2-Python|ParScale $P=2$|[🤗 ParScale/ParScale-QwenInit-3B-P2-Python](https://huggingface.co/ParScale/ParScale-QwenInit-3B-P2-Python)|
+|ParScale-QwenInit-3B-P4-Python|ParScale $P=4$|[🤗 ParScale/ParScale-QwenInit-3B-P4-Python](https://huggingface.co/ParScale/ParScale-QwenInit-3B-P4-Python)|
+|ParScale-QwenInit-3B-P8-Python|ParScale $P=8$|[🤗 ParScale/ParScale-QwenInit-3B-P8-Python](https://huggingface.co/ParScale/ParScale-QwenInit-3B-P8-Python)|
+
+- For full pretraining on Pile
+
+|Model|Description|Download|
+|:-:|:-:|:-:|
+|ParScale-QwenInit-3B-P1-Pile|Baseline $P=1$|[🤗 ParScale/ParScale-QwenInit-3B-P1-Pile](https://huggingface.co/ParScale/ParScale-QwenInit-3B-P1-Pile)|
+|ParScale-QwenInit-3B-P2-Pile|ParScale $P=2$|[🤗 ParScale/ParScale-QwenInit-3B-P2-Pile](https://huggingface.co/ParScale/ParScale-QwenInit-3B-P2-Pile)|
+|ParScale-QwenInit-3B-P4-Pile|ParScale $P=4$|[🤗 ParScale/ParScale-QwenInit-3B-P4-Pile](https://huggingface.co/ParScale/ParScale-QwenInit-3B-P4-Pile)|
+|ParScale-QwenInit-3B-P8-Pile|ParScale $P=8$|[🤗 ParScale/ParScale-QwenInit-3B-P8-Pile](https://huggingface.co/ParScale/ParScale-QwenInit-3B-P8-Pile)|
+
+
+### Checkpoints Used to Fit the Scaling Law
+
+Download link: https://huggingface.co/ParScale/ParScale-{size}-{P}-{dataset}
+
+- {size}: model size, from {0.7B, 0.9B, 1.3B, 1.8B, 3B, 4.7B}
+- {P}: number of parallels, from {P1, P2, P4, P8}
+- {dataset}: training dataset, from {Python, Pile}
 
 
 ## 📚 Citation
