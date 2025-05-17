@@ -9,6 +9,11 @@ _Yet Another Scaling Law beyond Parameters and Inference Time Scaling_
 [![Paper](https://img.shields.io/badge/arXiv-2505.10475-red)](https://arxiv.org/abs/2505.10475)
 [![huggingface](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-FFD21E)](https://huggingface.co/ParScale)
 
+<div align="center">
+<img src="figures/logo.jpg" style="width: 10%;" />
+</div>
+
+
 <p align="center">
     💡&nbsp;<a href="#-key-findings">Key Findings</a>
     | 📈&nbsp;<a href="#-scaling-law">Scaling Law</a>
@@ -16,7 +21,6 @@ _Yet Another Scaling Law beyond Parameters and Inference Time Scaling_
     | 🔥&nbsp;<a href="#-models">Models</a>
     | 📚&nbsp;<a href="#-citation">Citation</a>
 </p>
-
 </div>
 
 ## 🌟 About
@@ -50,7 +54,7 @@ Here are the core insights and benefits distilled from our theoretical analysis 
 
 🔁 **Dynamic Adaptation at Inference Time**: We find that ParScale remains effective with frozen main parameters for different $P$. This illustrates the potential of dynamic parallel scaling: switching $P$ to dynamically adapt model capabilities during inference.
 
-We release the inference code in `modeling_qwen2_parscale.py` and `configuration_qwen2_parscale.py`. Our 67 checkpoints is available at [🤗 HuggingFace](https://huggingface.co/ParScale) (coming soon).
+We release the inference code in `modeling_qwen2_parscale.py` and `configuration_qwen2_parscale.py`. Our 67 checkpoints is available at [🤗 HuggingFace](https://huggingface.co/ParScale).
 
 ---
 
@@ -91,15 +95,9 @@ python cost_analysis.py --hidden_size 2560 --intermediate_size 13824 --P 2 --bat
 
 ## 🔥 Models
 
-***(The checkpoints are uploading ... Stay tuned)***
-
 ✨ are our recommendation for strong models!
 
 ### Base models for scaling training data to 1T tokens
-
-<div align="center">
-<img src="figures/1t.png" style="width: 70%;" />
-</div>
 
 These models demonstrate strong competitiveness among existing small models, including SmolLM, gemma, and Llama-3.2.
 
@@ -159,6 +157,18 @@ Download link: https://huggingface.co/ParScale/ParScale-{size}-{P}-{dataset}
 - {P}: number of parallels, from {P1, P2, P4, P8}
 - {dataset}: training dataset, from {Python, Pile}
 - $6\times 4 \times 2=48$ checkpoints in total.
+
+### Usage Example with 🤗 Hugging Face
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+name = "ParScale/ParScale-1.8B-P8" # or anything else you like
+model = AutoModelForCausalLM.from_pretrained(name, trust_remote_code=True).to("cuda")
+tokenizer = AutoTokenizer.from_pretrained(name)
+inputs = tokenizer.encode("Hello, how are you today?", return_tensors="pt").to("cuda")
+outputs = model.generate(inputs, max_new_tokens=128)[0]
+print(tokenizer.decode(outputs))
+```
 
 
 ## 📚 Citation
